@@ -14,3 +14,4 @@ for line in lines:
 
 
 print(sorted([sum(t) for t in total], reverse=True))
+
