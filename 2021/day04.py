@@ -39,8 +39,7 @@ class Board:
         return unmarked
 
 
-def part1():
-    nums = lines[0].strip().split(',')
+def gen_boards():
     boards = []
 
     cur = []
@@ -50,6 +49,13 @@ def part1():
         if len(cur) == 5:
             boards.append(Board(cur))
             cur = []
+
+    return boards
+
+
+def part1():
+    nums = lines[0].strip().split(',')
+    boards = gen_boards()
 
     for num in nums:
         for board in boards:
@@ -61,15 +67,7 @@ def part1():
 
 def part2():
     nums = lines[0].strip().split(',')
-    boards = []
-
-    cur = []
-    for line in lines[1:]:
-        if len(line) > 3:
-            cur.append(re.findall(r'\d+', line))
-        if len(cur) == 5:
-            boards.append(Board(cur))
-            cur = []
+    boards = gen_boards()
 
     for num in nums:
         if len(boards) == 1:
