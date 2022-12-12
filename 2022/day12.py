@@ -15,12 +15,12 @@ def walkable(src, dst):
     return False
 
 
-def part1():
+def fill(start):
     grid = [[None for _ in range(len(lines[0]))] for _ in range(len(lines))]
     goal = None
     for y in range(len(lines)):
         for x in range(len(lines[0])):
-            if lines[y][x] == "S":
+            if lines[y][x] in start:
                 grid[y][x] = 0
             if lines[y][x] == "E":
                 goal = (y, x)
@@ -43,32 +43,12 @@ def part1():
         cur += 1
 
 
-def part2():
-    grid = [[None for _ in range(len(lines[0]))] for _ in range(len(lines))]
-    goal = None
-    for y in range(len(lines)):
-        for x in range(len(lines[0])):
-            if lines[y][x] in "aS":
-                grid[y][x] = 0
-            if lines[y][x] == "E":
-                goal = (y, x)
+def part1():
+    return fill("S")
 
-    cur = 0
-    while any([None in row for row in grid]):
-        for y in range(len(lines)):
-            for x in range(len(lines[0])):
-                if (y, x) == goal and grid[y][x] is not None:
-                    return grid[y][x]
-                if grid[y][x] == cur:
-                    if y - 1 >= 0 and grid[y - 1][x] is None and walkable(lines[y][x], lines[y - 1][x]):
-                        grid[y - 1][x] = cur + 1
-                    if y + 1 < len(lines) and grid[y + 1][x] is None and walkable(lines[y][x], lines[y + 1][x]):
-                        grid[y + 1][x] = cur + 1
-                    if x - 1 >= 0 and grid[y][x - 1] is None and walkable(lines[y][x], lines[y][x - 1]):
-                        grid[y][x - 1] = cur + 1
-                    if x + 1 < len(lines[0]) and grid[y][x + 1] is None and walkable(lines[y][x], lines[y][x + 1]):
-                        grid[y][x + 1] = cur + 1
-        cur += 1
+
+def part2():
+    return fill("aS")
 
 
 print(part1())
