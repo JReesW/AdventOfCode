@@ -14,6 +14,8 @@ def part1():
             xmin = x if x < xmin else xmin
             ymax = y if y > ymax else ymax
             ymin = y if y < ymin else ymin
+    offsetx, offsety = xmin - 1, ymin - 1
+    grid = [['.' for _ in range(xmax - xmin + 3)] for _ in range(ymax - ymin + 3)]
 
 
 
