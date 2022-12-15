@@ -9,6 +9,7 @@ def dist(a, b):
 def part1():
     beacons = []
     sensors = []
+    y = 10
 
     for line in lines:
         match line.split():
@@ -20,7 +21,15 @@ def part1():
                 beacons.append((xb, yb))
                 sensors.append((xs, ys))
 
-
+    total = set()
+    for x in range(-1000, 1000):
+        try:
+            for sensor, beacon in zip(sensors, beacons):
+                if dist(sensor, (x, y)) > dist(sensor, beacon) and (x, y) not in (*sensors, *beacons):
+                    raise Exception
+        except Exception:
+            total.add((x, y))
+    return len(total)
 
 
 def part2():
