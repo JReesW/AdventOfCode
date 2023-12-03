@@ -1,5 +1,5 @@
 with open("addenda/input.txt", 'r') as file:
-    lines = file.readlines()
+    lines = [line.strip() for line in file.readlines()]
 
 
 def part1():
