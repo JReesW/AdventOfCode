@@ -24,6 +24,8 @@ def part1():
     return sum({l for l in range(1, len(lines) + 1)} - impossible)
 
 
+# Only works if your input has one of each color in every game, which I got
+# If you have an input with a game that is missing a color, tough shit
 def part2():
     powers = 0
 
