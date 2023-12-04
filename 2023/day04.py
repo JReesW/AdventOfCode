@@ -22,7 +22,7 @@ def part2():
 
     for line in lines:
         card, nums = line.split(': ')
-        card = int([s for s in card.split(' ') if s][1])
+        card = int(card.split(' ')[-1])
 
         winning, yours = nums.split(' | ')
         winning = {int(n) for n in winning.split(' ') if n.strip().isnumeric()}
