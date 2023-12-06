@@ -22,8 +22,8 @@ def part1():
 
 
 def part2():
-    time = [int(m) for m in re.findall("\d+", lines[0].replace(' ', ''))][0]
-    dist = [int(m) for m in re.findall("\d+", lines[1].replace(' ', ''))][0]
+    time = int(re.findall("\d+", lines[0].replace(' ', ''))[0])
+    dist = int(re.findall("\d+", lines[1].replace(' ', ''))[0])
 
     wins = 0
     for t in range(time):
