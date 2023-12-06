@@ -38,6 +38,5 @@ def part2():
     return sum(cards.values())
 
 
-
 print(part1())
 print(part2())
