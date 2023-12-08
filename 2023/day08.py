@@ -46,7 +46,7 @@ def part2():
         for i, loc in enumerate(locs):
             if loc[2] == 'Z' and steps[i] == 0:
                 steps[i] = step
-        if all([steps[loc] != 0 for loc in range(len(locs))]):
+        if all([s != 0 for s in steps.values()]):
             break
 
     lcm = 1
