@@ -93,6 +93,8 @@ def part2():
     Count those by hand and there's your answer lmao
     """
 
+    return "Have fun! ;)"
+
 
 print(part1())
 print(part2())
