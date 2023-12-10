@@ -1,3 +1,6 @@
+import re
+
+
 with open("addenda/input10.txt", 'r') as file:
     lines = [line.strip() for line in file.readlines()]
 
@@ -24,6 +27,16 @@ dirs = {
 
 
 def part1(p2=False):
+#     lines = [line.strip() for line in """FF7FSF7F7F7F7F7F---7
+# L|LJ||||||||||||F--J
+# FL-7LJLJ||||||LJL-77
+# F--JF--7||LJLJIF7FJ-
+# L---JF-JLJIIIIFJLJJ7
+# |F|F-JF---7IIIL7L|7|
+# |FFJF7L7F-JF7IIL---7
+# 7-L-JL7||F7|L7F-7F7|
+# L.L7LFJ|||||FJL7||LJ
+# L7JLJL-JLJLJL--JLJ.L""".splitlines()]
     grid = [list(line) for line in lines]
     dist_grid = [[None for _ in row] for row in grid]
 
@@ -65,35 +78,17 @@ def part1(p2=False):
 def part2():
     grid, dist_grid = part1(True)
 
-    new_lines = []
-    for row, drow in zip(grid, dist_grid):
-        line = ""
-        for c, d in zip(row, drow):
-            if d is None:
-                line += '\033[91m' + '.' + '\033[0m'
-            else:
-                line += '\033[92m' + c + '\033[0m'
-        new_lines.append(
-            line.replace('7', '┐')
-            .replace('F', '┌')
-            .replace('J', '┘')
-            .replace('L', '└')
-            .replace('-', '─')
-            .replace('|', '│')
-        )
+    inside = 0
+    for y, row in enumerate(dist_grid):
+        line = "".join([(c if dist_grid[y][x] is not None else '.') for x, c in enumerate(grid[y])])
+        swaps = list(re.finditer("L-*7|F-*J|\|", line))
 
-    for line in new_lines:
-        print(line)
+        for x, c in enumerate(line):
+            if c == '.':
+                left = [swap for swap in swaps if swap.start() < x]
+                inside += len(left) % 2
 
-    """
-    And now, seeing as I didn't solve it algorithmically, it's time to do it by hand ;)
-    I took a screenshot of the output (making sure there was no line-spacing between lines)
-    Put the screenshot in paint.net and flooded the inside part with a single color.
-    Then you can see all red . characters that are surrounded by the flooding color.
-    Count those by hand and there's your answer lmao
-    """
-
-    return "Have fun! ;)"
+    return inside - 1  # I hope it's consistently off by one lmao
 
 
 print(part1())
