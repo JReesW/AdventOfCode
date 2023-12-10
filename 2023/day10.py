@@ -80,7 +80,7 @@ def part2():
             .replace('L', '└')
             .replace('-', '─')
             .replace('|', '│')
-        )  # + '\n')
+        )
 
     for line in new_lines:
         print(line)
