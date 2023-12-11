@@ -81,7 +81,7 @@ def part2():
                 left = [swap for swap in swaps if swap.start() < x]
                 inside += len(left) % 2
 
-    return inside  # I hope it's consistently off by one lmao
+    return inside
 
 
 print(part1())
