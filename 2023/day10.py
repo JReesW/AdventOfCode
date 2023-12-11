@@ -20,23 +20,13 @@ dirs = {
     '-': ((0, -1), (0, 1)),  # left or right
     '|': ((-1, 0), (1, 0)),  # up or down
     '7': ((0, -1), (1, 0)),  # left or down
-    'J': ((0, -1), (-1, 0)),  # left or up
+    'J': ((-1, 0), (0, -1)),  # left or up
     'F': ((0, 1), (1, 0)),  # right or down
-    'L': ((0, 1), (-1, 0))  # right or up
+    'L': ((-1, 0), (0, 1))  # right or up
 }
 
 
 def part1(p2=False):
-#     lines = [line.strip() for line in """FF7FSF7F7F7F7F7F---7
-# L|LJ||||||||||||F--J
-# FL-7LJLJ||||||LJL-77
-# F--JF--7||LJLJIF7FJ-
-# L---JF-JLJIIIIFJLJJ7
-# |F|F-JF---7IIIL7L|7|
-# |FFJF7L7F-JF7IIL---7
-# 7-L-JL7||F7|L7F-7F7|
-# L.L7LFJ|||||FJL7||LJ
-# L7JLJL-JLJLJL--JLJ.L""".splitlines()]
     grid = [list(line) for line in lines]
     dist_grid = [[None for _ in row] for row in grid]
 
@@ -52,8 +42,11 @@ def part1(p2=False):
         pass
 
     movers = [(start[0] + y, start[1] + x) for (y, x), chars in starting.items() if grid[start[0] + y][start[1] + x] in chars]
+    start_dirs = [(y, x) for (y, x), chars in starting.items() if grid[start[0] + y][start[1] + x] in chars]
     for mover in movers:
         dist_grid[mover[0]][mover[1]] = 1
+
+    grid[start[0]][start[1]] = {v: k for k, v in dirs.items()}[tuple(sorted(start_dirs))]
 
     dist = 2
     try:
@@ -88,7 +81,7 @@ def part2():
                 left = [swap for swap in swaps if swap.start() < x]
                 inside += len(left) % 2
 
-    return inside - 1  # I hope it's consistently off by one lmao
+    return inside  # I hope it's consistently off by one lmao
 
 
 print(part1())
