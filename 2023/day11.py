@@ -28,7 +28,7 @@ def part1():
 
     total_dist = 0
     for i, gal in enumerate(galaxies):
-        for gal2 in galaxies[i+1:]:
+        for gal2 in galaxies[i + 1:]:
             hor_d = abs(gal[0] - gal2[0]) + len([e for e in empty_ver if min(gal[0], gal2[0]) < e < max(gal[0], gal2[0])])
             ver_d = abs(gal[1] - gal2[1]) + len([e for e in empty_hor if min(gal[1], gal2[1]) < e < max(gal[1], gal2[1])])
             total_dist += hor_d + ver_d
