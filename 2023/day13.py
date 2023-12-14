@@ -68,6 +68,7 @@ def part2():
 
     # for grid in grids:
     #     print(find_mirror(grid))
+
     p1 = part1(True)
 
     return sum([find_mirror(grid, p2=p1[i]) for i, grid in enumerate(grids)])
