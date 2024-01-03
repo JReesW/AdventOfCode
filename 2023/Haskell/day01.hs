@@ -4,7 +4,7 @@ module Main where
 import System.IO
 import Control.Monad
 import Data.Char
-import Data.Text (replace, pack, unpack)
+import Data.Text (replace, pack, unpack)  -- add 'text' to build-depends
 import Data.List (elemIndex, isInfixOf)
 import Data.Maybe
 
