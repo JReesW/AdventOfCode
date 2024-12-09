@@ -35,18 +35,15 @@ def part2():
     for i, file in enumerate(reversed([f for f in files if f[0] != -1])):
         f_i = files.index(file)
         for j, empty in [(k, f) for k, f in enumerate(files) if f[0] == -1 and k < f_i]:
-            if empty[1] >= file[1] and j < files.index(file):
+            if empty[1] >= file[1]:
                 files[j] = (empty[0], empty[1] - file[1])
-                files = [(-1, f[1]) if f[0] == file[0] else f for f in files if f[1] > 0]
+                files[f_i] = (-1, files[f_i][1])
                 files.insert(j, file)
                 break
 
     res = []
     for f, l in files:
-        if f == -1:
-            res += list((0, ) * l)
-        else:
-            res += list((f, ) * l)
+        res += list((max(f, 0), ) * l)
 
     return sum([i * c for i, c in enumerate(res)])
 
